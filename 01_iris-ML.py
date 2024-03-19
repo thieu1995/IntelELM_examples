@@ -14,6 +14,9 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier,
 from utils.helper import save_metrics, save_model
 from utils.visualizer import draw_confusion_matrix
 from pathlib import Path
+import pandas as pd
+import time
+
 
 TEST_SIZE = 0.2
 dataset_name = "iris"
@@ -45,7 +48,10 @@ classifiers = {
     "ELM": ElmClassifier(hidden_size=50, act_name="elu")
 }
 
+t_dict = {}
 for name, model in classifiers.items():
+    t_start = time.perf_counter()
+
     ## Train the model
     model.fit(X=data.X_train, y=data.y_train)
 
@@ -68,3 +74,9 @@ for name, model in classifiers.items():
                           pathsave=f"{PATH_SAVE}/{name}-test-cm.png")
     ## Save model
     save_model(model=model, save_path=PATH_SAVE, filename=f"{name}-model.pkl")
+
+    t_end = time.perf_counter() - t_start
+    t_dict[name] = t_end
+
+df = pd.DataFrame.from_dict(t_dict, orient="index")
+df.to_csv(f"{PATH_SAVE}/time-ML.csv")

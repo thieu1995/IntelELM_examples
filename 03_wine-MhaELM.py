@@ -8,6 +8,8 @@ from sklearn.datasets import load_wine
 from intelelm import Data, MhaElmClassifier
 from utils.visualizer import draw_confusion_matrix
 from pathlib import Path
+import pandas as pd
+import time
 
 # 13 inputs, 3 outputs, 178 samples
 EPOCH = 500
@@ -41,7 +43,10 @@ list_paras = [
     {"name": "TLO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
 ]
 
+t_dict = {}
 for idx, opt in enumerate(list_optimizers):
+    t_start = time.perf_counter()
+
     ## Create model
     model = MhaElmClassifier(hidden_size=10, act_name="elu", obj_name="BSL",
                              optimizer=opt, optimizer_paras=list_paras[idx], verbose=False)
@@ -68,3 +73,9 @@ for idx, opt in enumerate(list_optimizers):
                           pathsave=f"{PATH_SAVE}/{model.optimizer.name}-test-cm.png")
     ## Save model
     model.save_model(save_path=PATH_SAVE, filename=f"{model.optimizer.name}-model.pkl")
+
+    t_end = time.perf_counter() - t_start
+    t_dict[list_paras[idx]["name"]] = t_end
+
+df = pd.DataFrame.from_dict(t_dict, orient="index")
+df.to_csv(f"{PATH_SAVE}/time-MhaELM.csv")
