@@ -13,14 +13,15 @@
 # ELM
 # AGTO-ELM       Artificial Gorilla Troops Optimization
 # AVOA-ELM     African Vultures Optimization Algorithm
-# GSKA-ELM      Gaining Sharing Knowledge*based Algorithm
+# ARO-ELM      Artificial Rabbits Optimization
 # HGSO-ELM      Henry Gas Solubility Optimization
 # SMA-ELM      Slime Mould Algorithm
 # TLO-ELM     Teaching Learning*based Optimization
 
-("OriginalAGTO", "OriginalAVOA", "OriginalGSKA", "OriginalHGSO", "OriginalSMA", "OriginalTLO")
+("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalSMA", "OriginalTLO")
 
 ```
+
 
 2) Benchmark dataset from sklearn
 

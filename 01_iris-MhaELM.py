@@ -33,11 +33,11 @@ data.X_test = scaler_X.transform(data.X_test)
 data.y_train, scaler_y = data.encode_label(data.y_train)
 data.y_test = scaler_y.transform(data.y_test)
 
-list_optimizers = ("OriginalAGTO", "OriginalAVOA", "OriginalGSKA", "OriginalHGSO", "OriginalSMA", "OriginalTLO")
+list_optimizers = ("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalSMA", "OriginalTLO")
 list_paras = [
     {"name": "AGTO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "AVOA-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
-    {"name": "GSKA-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
+    {"name": "ARO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "HGSO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "SMA-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "TLO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
