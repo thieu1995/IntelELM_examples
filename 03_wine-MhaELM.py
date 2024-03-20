@@ -48,7 +48,7 @@ for idx, opt in enumerate(list_optimizers):
     t_start = time.perf_counter()
 
     ## Create model
-    model = MhaElmClassifier(hidden_size=10, act_name="elu", obj_name="CEL",
+    model = MhaElmClassifier(hidden_size=15, act_name="elu", obj_name="CEL",
                              optimizer=opt, optimizer_paras=list_paras[idx], verbose=False)
 
     ## Train the model
