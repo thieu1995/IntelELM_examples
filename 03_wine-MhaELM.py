@@ -12,7 +12,7 @@ import pandas as pd
 import time
 
 # 13 inputs, 3 outputs, 178 samples
-EPOCH = 500
+EPOCH = 750
 POP_SIZE = 20
 TEST_SIZE = 0.2
 dataset_name = "wine"
@@ -33,13 +33,13 @@ data.X_test = scaler_X.transform(data.X_test)
 data.y_train, scaler_y = data.encode_label(data.y_train)
 data.y_test = scaler_y.transform(data.y_test)
 
-list_optimizers = ("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalSMA", "OriginalTLO")
+list_optimizers = ("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalEVO", "OriginalTLO")
 list_paras = [
     {"name": "AGTO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "AVOA-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "ARO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "HGSO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
-    {"name": "SMA-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
+    {"name": "EVO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
     {"name": "TLO-ELM", "epoch": EPOCH, "pop_size": POP_SIZE},
 ]
 
@@ -48,7 +48,7 @@ for idx, opt in enumerate(list_optimizers):
     t_start = time.perf_counter()
 
     ## Create model
-    model = MhaElmClassifier(hidden_size=10, act_name="elu", obj_name="BSL",
+    model = MhaElmClassifier(hidden_size=10, act_name="elu", obj_name="CEL",
                              optimizer=opt, optimizer_paras=list_paras[idx], verbose=False)
 
     ## Train the model

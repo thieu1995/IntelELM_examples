@@ -15,10 +15,10 @@
 # AVOA-ELM     African Vultures Optimization Algorithm
 # ARO-ELM      Artificial Rabbits Optimization
 # HGSO-ELM      Henry Gas Solubility Optimization
-# SMA-ELM      Slime Mould Algorithm
+# EVO-ELM      Energy Valley Optimization
 # TLO-ELM     Teaching Learning*based Optimization
 
-("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalSMA", "OriginalTLO")
+("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalEVO", "OriginalTLO")
 
 ```
 

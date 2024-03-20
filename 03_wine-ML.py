@@ -45,8 +45,8 @@ classifiers = {
     "RF": RandomForestClassifier(max_depth=4, n_estimators=25, max_features=2, random_state=42),
     "ABC": AdaBoostClassifier(n_estimators=25, learning_rate=0.5, random_state=42),
     "GBC": GradientBoostingClassifier(n_estimators=40, learning_rate=0.5, max_depth=3, random_state=42),
-    "MLP": MLPClassifier(alpha=1, max_iter=750, hidden_layer_sizes=(10,), activation="relu", random_state=42),
-    "ELM": ElmClassifier(hidden_size=20, act_name="elu")
+    "MLP": MLPClassifier(alpha=1, max_iter=1000, hidden_layer_sizes=(20,), activation="relu", random_state=42),
+    "ELM": ElmClassifier(hidden_size=75, act_name="elu")
 }
 
 t_dict = {}

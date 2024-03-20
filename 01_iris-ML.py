@@ -41,10 +41,10 @@ classifiers = {
     "SVM": SVC(kernel="linear", C=0.1, random_state=42),
     "KNN": KNeighborsClassifier(n_neighbors=2),
     "DT": DecisionTreeClassifier(max_depth=4, random_state=42),
-    "RF": RandomForestClassifier(max_depth=4, n_estimators=20, max_features=1, random_state=42),
+    "RF": RandomForestClassifier(max_depth=4, n_estimators=20, max_features=2, random_state=42),
     "ABC": AdaBoostClassifier(n_estimators=20, learning_rate=0.5, random_state=42),
     "GBC": GradientBoostingClassifier(n_estimators=30, learning_rate=0.5, max_depth=2, random_state=42),
-    "MLP": MLPClassifier(alpha=1, max_iter=750, hidden_layer_sizes=(10,), activation="relu", random_state=42),
+    "MLP": MLPClassifier(alpha=1, max_iter=1000, hidden_layer_sizes=(10,), activation="relu", random_state=42),
     "ELM": ElmClassifier(hidden_size=50, act_name="elu")
 }
 

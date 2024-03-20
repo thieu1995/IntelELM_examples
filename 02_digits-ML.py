@@ -39,13 +39,13 @@ data.y_train, scaler_y = data.encode_label(data.y_train)
 data.y_test = scaler_y.transform(data.y_test)
 
 classifiers = {
-    "SVM": SVC(kernel="linear", C=2.5, random_state=42),
+    "SVM": SVC(kernel="linear", C=1.5, random_state=42),
     "KNN": KNeighborsClassifier(n_neighbors=5),
     "DT": DecisionTreeClassifier(max_depth=7, random_state=42),
     "RF": RandomForestClassifier(max_depth=7, n_estimators=50, max_features="sqrt", random_state=42),
     "ABC": AdaBoostClassifier(n_estimators=50, learning_rate=0.5, random_state=42),
     "GBC": GradientBoostingClassifier(n_estimators=75, learning_rate=0.5, max_depth=7, random_state=42),
-    "MLP": MLPClassifier(alpha=1, max_iter=100, hidden_layer_sizes=(100,), activation="relu", random_state=42),
+    "MLP": MLPClassifier(alpha=1, max_iter=1000, hidden_layer_sizes=(80,), activation="relu", random_state=42),
     "ELM": ElmClassifier(hidden_size=100, act_name="elu")
 }
 
