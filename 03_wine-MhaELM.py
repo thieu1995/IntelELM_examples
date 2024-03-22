@@ -78,4 +78,4 @@ for idx, opt in enumerate(list_optimizers):
     t_dict[list_paras[idx]["name"]] = t_end
 
 df = pd.DataFrame.from_dict(t_dict, orient="index")
-df.to_csv(f"{PATH_SAVE}/time-MhaELM.csv")
+df.to_csv(f"{PATH_SAVE}/time-mha-elm.csv")

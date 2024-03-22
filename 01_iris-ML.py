@@ -79,4 +79,4 @@ for name, model in classifiers.items():
     t_dict[name] = t_end
 
 df = pd.DataFrame.from_dict(t_dict, orient="index")
-df.to_csv(f"{PATH_SAVE}/time-ML.csv")
+df.to_csv(f"{PATH_SAVE}/time-ml.csv")
