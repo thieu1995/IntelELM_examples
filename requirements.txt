@@ -9,4 +9,6 @@ plotly>=5.10.0
 kaleido >=0.2.1
 metacluster==1.2.0
 matplotlib~=3.5.2
-intelelm>=1.1.0
+intelelm>=1.2.0
+imbalanced-learn~=0.12.4
+seaborn~=0.13.0
