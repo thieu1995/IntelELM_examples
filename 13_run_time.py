@@ -57,6 +57,13 @@ def draw_computation_time(data_name, pathfile, verbose=False):
         plt.show()
 
 
-draw_computation_time(data_name="iris", pathfile="history")
-draw_computation_time(data_name="digits", pathfile="history")
-draw_computation_time(data_name="wine", pathfile="history")
+draw_computation_time(data_name="credit_score", pathfile="history_new")
+draw_computation_time(data_name="digits", pathfile="history_new")
+draw_computation_time(data_name="income", pathfile="history_new")
+draw_computation_time(data_name="loan_approval", pathfile="history_new")
+draw_computation_time(data_name="stroke_prediction", pathfile="history_new")
+draw_computation_time(data_name="stellar", pathfile="history_new")
+draw_computation_time(data_name="hotel_booking", pathfile="history_new")
+draw_computation_time(data_name="mobile_price", pathfile="history_new")
+draw_computation_time(data_name="airline_passenger", pathfile="history_new")
+draw_computation_time(data_name="bank_customer_churn", pathfile="history_new")

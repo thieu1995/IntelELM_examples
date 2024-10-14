@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# Created by "Thieu" at 03:02, 28/11/2023 ----------%                                                                               
+# Created by "Thieu" at 4:58 PM, 14/10/2024 -------%                                                                               
 #       Email: nguyenthieu2102@gmail.com            %                                                    
 #       Github: https://github.com/thieu1995        %                         
 # --------------------------------------------------%
 
-from sklearn.datasets import load_digits
-from intelelm import Data, ElmClassifier
+from data.data_loader import load_mobile_price
+from intelelm import ElmClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
@@ -18,35 +18,24 @@ import pandas as pd
 import time
 
 
-# # 64 inputs, 10 outputs, 1797 samples
 TEST_SIZE = 0.2
-dataset_name = "digits"
+dataset_name = "mobile_price"
 PATH_SAVE = f"history_new/{dataset_name}"
 Path(PATH_SAVE).mkdir(parents=True, exist_ok=True)
 
 ## Load data object
-X, y = load_digits(return_X_y=True)
-data = Data(X, y, name=dataset_name)
-
-## Split train and test
-data.split_train_test(test_size=TEST_SIZE, random_state=2, inplace=True, shuffle=True)
-
-## Scaling dataset
-data.X_train, scaler_X = data.scale(data.X_train, scaling_methods=("standard"))
-data.X_test = scaler_X.transform(data.X_test)
-
-data.y_train, scaler_y = data.encode_label(data.y_train)
-data.y_test = scaler_y.transform(data.y_test)
+data, scaler_X, scaler_y = load_mobile_price(f"data/{dataset_name}.csv", scaling_method="standard")
+#### (2000 x 21) x 4 labels (0(low cost), 1(medium cost), 2(high cost) and 3(very high cost))
 
 classifiers = {
-    "SVM": SVC(kernel="linear", C=1.5, random_state=42),
+    "SVM": SVC(kernel="linear", C=0.5, random_state=42),
     "KNN": KNeighborsClassifier(n_neighbors=5),
-    "DT": DecisionTreeClassifier(max_depth=7, random_state=42),
-    "RF": RandomForestClassifier(max_depth=7, n_estimators=50, max_features="sqrt", random_state=42),
-    "ABC": AdaBoostClassifier(n_estimators=50, learning_rate=0.5, random_state=42),
-    "GBC": GradientBoostingClassifier(n_estimators=75, learning_rate=0.5, max_depth=7, random_state=42),
-    "MLP": MLPClassifier(alpha=1, max_iter=1000, hidden_layer_sizes=(80,), activation="relu", random_state=42),
-    "ELM": ElmClassifier(layer_sizes=(100, ), act_name="elu")
+    "DT": DecisionTreeClassifier(max_depth=6, random_state=42),
+    "RF": RandomForestClassifier(max_depth=6, n_estimators=30, max_features=5, random_state=42),
+    "ABC": AdaBoostClassifier(n_estimators=30, learning_rate=0.15, random_state=42),
+    "GBC": GradientBoostingClassifier(n_estimators=30, learning_rate=0.15, max_depth=5, random_state=42),
+    "MLP": MLPClassifier(alpha=1, max_iter=1000, hidden_layer_sizes=(20, ), activation="relu", random_state=42),
+    "ELM": ElmClassifier(layer_sizes=(50, ), act_name="elu")
 }
 
 t_dict = {}

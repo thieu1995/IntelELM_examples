@@ -1,37 +1,27 @@
 #!/usr/bin/env python
-# Created by "Thieu" at 20:45, 19/03/2024 ----------%                                                                               
+# Created by "Thieu" at 1:03 PM, 14/10/2024 -------%                                                                               
 #       Email: nguyenthieu2102@gmail.com            %                                                    
 #       Github: https://github.com/thieu1995        %                         
 # --------------------------------------------------%
 
-from sklearn.datasets import load_digits
-from intelelm import Data, MhaElmClassifier
+from data.data_loader import load_mobile_price
+from intelelm import MhaElmClassifier
 from utils.visualizer import draw_confusion_matrix
 from pathlib import Path
 import pandas as pd
 import time
 
-# 64 inputs, 10 outputs, 1797 samples
+
 EPOCH = 750
 POP_SIZE = 20
 TEST_SIZE = 0.2
-dataset_name = "digits"
+dataset_name = "mobile_price"
 PATH_SAVE = f"history_new/{dataset_name}"
 Path(PATH_SAVE).mkdir(parents=True, exist_ok=True)
 
 ## Load data object
-X, y = load_digits(return_X_y=True)
-data = Data(X, y, name=dataset_name)
-
-## Split train and test
-data.split_train_test(test_size=TEST_SIZE, random_state=2, inplace=True, shuffle=True)
-
-## Scaling dataset
-data.X_train, scaler_X = data.scale(data.X_train, scaling_methods=("standard"))
-data.X_test = scaler_X.transform(data.X_test)
-
-data.y_train, scaler_y = data.encode_label(data.y_train)
-data.y_test = scaler_y.transform(data.y_test)
+data, scaler_X, scaler_y = load_mobile_price(f"data/{dataset_name}.csv", scaling_method="standard")
+#### (2000 x 21) x 4 labels (0(low cost), 1(medium cost), 2(high cost) and 3(very high cost))
 
 list_optimizers = ("OriginalAGTO", "OriginalAVOA", "OriginalARO", "OriginalHGSO", "OriginalEVO", "OriginalTLO")
 list_paras = [
@@ -48,7 +38,7 @@ for idx, opt in enumerate(list_optimizers):
     t_start = time.perf_counter()
 
     ## Create model
-    model = MhaElmClassifier(layer_sizes=(20, ), act_name="elu", obj_name="CEL",
+    model = MhaElmClassifier(layer_sizes=(10, ), act_name="elu", obj_name="CEL",
                              optim=opt, optim_paras=list_paras[idx], verbose=False)
 
     ## Train the model
