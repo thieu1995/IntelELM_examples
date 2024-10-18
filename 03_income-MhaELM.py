@@ -12,11 +12,11 @@ import pandas as pd
 import time
 
 
-EPOCH = 750
-POP_SIZE = 20
+EPOCH = 1000
+POP_SIZE = 50
 TEST_SIZE = 0.2
 dataset_name = "income"
-PATH_SAVE = f"history_new/{dataset_name}"
+PATH_SAVE = f"history_new_01/{dataset_name}"
 Path(PATH_SAVE).mkdir(parents=True, exist_ok=True)
 
 ## Load data object
