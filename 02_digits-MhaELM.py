@@ -16,7 +16,7 @@ EPOCH = 1000
 POP_SIZE = 50
 TEST_SIZE = 0.2
 dataset_name = "digits"
-PATH_SAVE = f"history_new_01/{dataset_name}"
+PATH_SAVE = f"history_new_02/{dataset_name}"
 Path(PATH_SAVE).mkdir(parents=True, exist_ok=True)
 
 ## Load data object
@@ -48,7 +48,7 @@ for idx, opt in enumerate(list_optimizers):
     t_start = time.perf_counter()
 
     ## Create model
-    model = MhaElmClassifier(layer_sizes=(30, ), act_name="elu", obj_name="CEL",
+    model = MhaElmClassifier(layer_sizes=(32, ), act_name="relu", obj_name="CEL",
                              optim=opt, optim_paras=list_paras[idx], verbose=False)
 
     ## Train the model
