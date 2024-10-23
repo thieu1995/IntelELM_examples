@@ -16,11 +16,12 @@ from utils.visualizer import draw_confusion_matrix
 from pathlib import Path
 import pandas as pd
 import time
+import config
 
 
 TEST_SIZE = 0.2
 dataset_name = "hotel_booking"
-PATH_SAVE = f"history_new/{dataset_name}"
+PATH_SAVE = f"{config.PATH_SAVE}/{dataset_name}"
 Path(PATH_SAVE).mkdir(parents=True, exist_ok=True)
 
 ## Load data object
@@ -51,10 +52,10 @@ for name, model in classifiers.items():
 
     ## Save metrics
     save_metrics(problem="classification", y_true=data.y_train, y_pred=y_pred_train,
-                 list_metrics=("AS", "PS", "NPV", "RS", "F1S"),
+                 list_metrics=config.LIST_METRICS,
                  save_path=PATH_SAVE, filename=f"{name}-train-metrics.csv")
     save_metrics(problem="classification", y_true=data.y_test, y_pred=y_pred_test,
-                 list_metrics=("AS", "PS", "NPV", "RS", "F1S"),
+                 list_metrics=config.LIST_METRICS,
                  save_path=PATH_SAVE, filename=f"{name}-test-metrics.csv")
 
     ## Save confusion matrix

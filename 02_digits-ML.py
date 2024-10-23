@@ -5,7 +5,7 @@
 # --------------------------------------------------%
 
 from sklearn.datasets import load_digits
-from intelelm import Data, ElmClassifier
+from intelelm import ElmClassifier
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
@@ -16,27 +16,17 @@ from utils.visualizer import draw_confusion_matrix
 from pathlib import Path
 import pandas as pd
 import time
+import config
 
 
-# # 64 inputs, 10 outputs, 1797 samples
 TEST_SIZE = 0.2
 dataset_name = "digits"
-PATH_SAVE = f"history_new/{dataset_name}"
+PATH_SAVE = f"{config.PATH_SAVE}/{dataset_name}"
 Path(PATH_SAVE).mkdir(parents=True, exist_ok=True)
 
 ## Load data object
-X, y = load_digits(return_X_y=True)
-data = Data(X, y, name=dataset_name)
-
-## Split train and test
-data.split_train_test(test_size=TEST_SIZE, random_state=2, inplace=True, shuffle=True)
-
-## Scaling dataset
-data.X_train, scaler_X = data.scale(data.X_train, scaling_methods=("standard"))
-data.X_test = scaler_X.transform(data.X_test)
-
-data.y_train, scaler_y = data.encode_label(data.y_train)
-data.y_test = scaler_y.transform(data.y_test)
+data, scaler_X, scaler_y = load_digits(None, scaling_method="standard")
+# 64 inputs, 10 outputs, 1797 samples
 
 classifiers = {
     "SVM": SVC(kernel="linear", C=1.5, random_state=42),
@@ -62,10 +52,10 @@ for name, model in classifiers.items():
 
     ## Save metrics
     save_metrics(problem="classification", y_true=data.y_train, y_pred=y_pred_train,
-                 list_metrics=("AS", "PS", "NPV", "RS", "F1S"),
+                 list_metrics=config.LIST_METRICS,
                  save_path=PATH_SAVE, filename=f"{name}-train-metrics.csv")
     save_metrics(problem="classification", y_true=data.y_test, y_pred=y_pred_test,
-                 list_metrics=("AS", "PS", "NPV", "RS", "F1S"),
+                 list_metrics=config.LIST_METRICS,
                  save_path=PATH_SAVE, filename=f"{name}-test-metrics.csv")
 
     ## Save confusion matrix

@@ -7,6 +7,25 @@
 from intelelm import Data
 import pandas as pd
 from imblearn.over_sampling import SMOTE
+from sklearn.datasets import load_digits as ld
+
+
+def load_digits(path_file, test_size=0.2, seed=2, shuffle=True, scaling_method="standard"):
+    ## Load data object
+    X, y = ld(return_X_y=True)
+    data = Data(X, y, name="Digits")
+
+    ## Split train and test
+    data.split_train_test(test_size=test_size, random_state=seed, inplace=True, shuffle=shuffle, stratify=y)
+
+    ## Scaling dataset
+    data.X_train, scaler_X = data.scale(data.X_train, scaling_methods=(scaling_method,))
+    data.X_test = scaler_X.transform(data.X_test)
+
+    data.y_train, scaler_y = data.encode_label(data.y_train)
+    data.y_test = scaler_y.transform(data.y_test)
+
+    return data, scaler_X, scaler_y
 
 
 def load_income(path_file, test_size=0.2, seed=2, shuffle=True, scaling_method="standard"):
